@@ -23,7 +23,7 @@ public class WlDateUtil {
      * @param fromDate 入参
      * @return 结果
      */
-    public int dayBeginCompareToCurrent(Date fromDate) {
+    public static int compareToCurrentByDayBegin(Date fromDate) {
         return getDayBeginMillis(fromDate).compareTo(getCurrentZeroTimeMillis());
     }
 
@@ -34,7 +34,7 @@ public class WlDateUtil {
      * @param toDate   入参
      * @return 结果
      */
-    public int dayBeginCompare(Date fromDate, Date toDate) {
+    public static int compareByDayBegin(Date fromDate, Date toDate) {
         return getDayBeginMillis(fromDate).compareTo(getDayBeginMillis(toDate));
     }
 
