@@ -85,7 +85,7 @@ public class WlDateUtil {
      * @return 结果
      */
     public static Long getCurrentZeroTimeMillis() {
-        return getZeroTimeMillis(System.currentTimeMillis());
+        return getZeroTimeMillis(WlSystemClock.now());
     }
 
 }
