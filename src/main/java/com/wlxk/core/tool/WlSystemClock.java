@@ -13,16 +13,14 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class WlSystemClock {
 
-    private final int period;
 
     private final AtomicLong now;
 
     private static class InstanceHolder {
-        private static final WlSystemClock INSTANCE = new WlSystemClock(1);
+        private static final WlSystemClock INSTANCE = new WlSystemClock();
     }
 
-    private WlSystemClock(int period) {
-        this.period = period;
+    private WlSystemClock() {
         this.now = new AtomicLong(System.currentTimeMillis());
         scheduleClockUpdating();
     }
@@ -33,11 +31,11 @@ public class WlSystemClock {
 
     private void scheduleClockUpdating() {
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(runnable -> {
-            Thread thread = new Thread(runnable, "WlSystem Clock");
+            Thread thread = new Thread(runnable, "WlSystemClock");
             thread.setDaemon(true);
             return thread;
         });
-        scheduler.scheduleAtFixedRate(() -> now.set(System.currentTimeMillis()), period, period, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(() -> now.set(System.currentTimeMillis()), 1, 1, TimeUnit.MILLISECONDS);
     }
 
     private long currentTimeMillis() {
